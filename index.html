@@ -1,0 +1,610 @@
+```html
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>"JUWITA" ITU JUWANTI - Portal Kisah</title>
+  
+  <!-- Font Google Modern & Elegan -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Lora:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg-body: #0f172a;
+      --surface: #ffffff;
+      --surface-sub: #f8fafc;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 16px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-body);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      color: var(--text-main);
+    }
+
+    /* Container HP Vertikal Frame */
+    .app-viewport {
+      width: 100%;
+      max-width: 430px; /* Ukuran layar HP vertikal modern */
+      background-color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      box-shadow: 0 0 50px rgba(0, 0, 0, 0.4);
+      padding-bottom: 90px; /* Jarak untuk tombol WhatsApp mengambang */
+    }
+
+    /* Header Portal Navigasi */
+    header {
+      background: var(--surface);
+      padding: 16px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -0.5px;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-badge {
+      background: #dbeafe;
+      color: var(--primary-dark);
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .header-icon {
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+
+    /* Tab Navigasi Kategori */
+    .nav-tabs {
+      display: flex;
+      background: var(--surface);
+      padding: 4px 16px;
+      border-bottom: 1px solid var(--border);
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .tab-btn {
+      padding: 10px 16px;
+      border: none;
+      background: none;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-bottom: 2px solid transparent;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    /* Area Konten */
+    .content-area {
+      padding: 20px;
+    }
+
+    .tab-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Styling Artikel Utama */
+    .article-header {
+      margin-bottom: 20px;
+    }
+
+    .category-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .article-title {
+      font-family: 'Lora', serif;
+      font-size: 26px;
+      line-height: 1.3;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 12px;
+    }
+
+    .article-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .article-meta {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .article-body {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #334155;
+      padding-top: 16px;
+    }
+
+    .article-body p {
+      margin-bottom: 18px;
+      text-align: justify;
+    }
+
+    blockquote {
+      margin: 24px 0;
+      padding: 16px 20px;
+      background: #eff6ff;
+      border-left: 4px solid var(--primary);
+      border-radius: 0 12px 12px 0;
+      font-family: 'Lora', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: #1e3a8a;
+    }
+
+    .card-quote-final {
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: white;
+      padding: 24px;
+      border-radius: var(--radius);
+      text-align: center;
+      font-family: 'Lora', serif;
+      font-size: 18px;
+      font-style: italic;
+      margin-top: 30px;
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+    }
+
+    /* List Berita Formalitas */
+    .news-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .news-card {
+      display: flex;
+      gap: 12px;
+      background: var(--surface-sub);
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: transform 0.1s ease;
+    }
+
+    .news-card:active {
+      transform: scale(0.98);
+    }
+
+    .news-thumb {
+      width: 80px;
+      height: 80px;
+      border-radius: 10px;
+      object-fit: cover;
+      background-color: #cbd5e1;
+      flex-shrink: 0;
+    }
+
+    .news-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .news-tag {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .news-title {
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text-main);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .news-time {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 6px;
+    }
+
+    /* Modal Pemberitahuan Formalitas */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 200;
+    }
+
+    .modal-box {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      width: 85%;
+      max-width: 320px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .modal-box h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .modal-box p {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .modal-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    /* Tombol WhatsApp Mengambang */
+    .wa-float {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: calc(100% - 40px);
+      max-width: 390px;
+      z-index: 99;
+    }
+
+    .wa-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: #25D366;
+      color: white;
+      text-decoration: none;
+      padding: 16px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 15px;
+      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.35);
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .wa-btn:active {
+      transform: scale(0.96);
+      background: #1eb957;
+    }
+
+    .wa-btn svg {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      font-size: 12px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-viewport">
+    
+    <!-- Header Utama -->
+    <header>
+      <div class="brand">
+        RUANG KISAH <span class="brand-badge">PRO</span>
+      </div>
+    </header>
+
+    <!-- Tab Navigasi -->
+    <nav class="nav-tabs">
+      <button class="tab-btn active" onclick="openTab(event, 'utama')">Kisah Utama</button>
+      <button class="tab-btn" onclick="openTab(event, 'berita')">Berita Terkini</button>
+      <button class="tab-btn" onclick="openTab(event, 'hiburan')">Hiburan</button>
+    </nav>
+
+    <!-- Container Konten -->
+    <main class="content-area">
+
+      <!-- TAB 1: KISAH UTAMA (DEFAULT) -->
+      <section id="utama" class="tab-content active">
+        <article class="article-header">
+          <span class="category-tag">Catatan Harian</span>
+          <h1 class="article-title">"JUWITA" ITU JUWANTI</h1>
+          <p class="article-subtitle">Sebuah kisah sederhana tentang ketulusan dan kekaguman yang tersembunyi.</p>
+          <div class="article-meta">
+            <span>Ditulis oleh Driver</span>
+            <span>•</span>
+            <span>3 Mins Read</span>
+          </div>
+        </article>
+
+        <div class="article-body">
+          <p>Sepanjang hari itu, aku mendapat enam orderan dari Solaria. Enam kali bolak-balik ke restoran yang sama, dan enam kali aku melihat nama yang tertulis di bagian bawah struk: <b>Juwanti, bukan Juwita.</b></p>
+
+          <p>Aku menyimpan enam lembar struk itu di laci motor. Hanya struk dari hari pertama. Tidak ada yang lain.</p>
+
+          <p>Suatu hari, temanku bercanda bahwa aku menyukai Juwita. Aku mengoreksinya. Namanya Juwanti. Bagiku, nama itu penting. Entah kenapa, aku merasa perlu mengingatnya dengan benar.</p>
+
+          <p>Sejak itu aku mulai memperhatikan. Banyak driver memanggilnya Juwita. Mereka memuji keramahan dan senyumnya. Aku penasaran, apa yang membuat orang begitu terkesan padanya.</p>
+
+          <p>Kadang-kadang, Juwanti sendiri yang mengantar pesanan ke meja pengambilan. Saat suatu hari ia mengantarkan pesananku, aku merasa senang. Namun tak lama kemudian aku sadar, ia melakukan hal yang sama kepada semua orang. Tidak ada perlakuan khusus. Ia memang baik kepada siapa saja.</p>
+
+          <p>Semakin lama aku mengamati, semakin banyak hal baik yang kutemukan. Dan aku mengerti bahwa semua kebaikannya bukan ditujukan hanya kepadaku. Ia hanyalah seseorang yang tulus memperlakukan semua orang dengan sama.</p>
+
+          <p>Suatu siang, saat hendak pergi ke mushola, tanpa sengaja kami menuju eskalator yang sama dari arah berbeda. Kami berjalan berdekatan beberapa langkah. Aku menyapanya dan bertanya ke mana ia akan pergi.</p>
+
+          <blockquote>
+            "Mau sholat, Pak."
+          </blockquote>
+
+          <p>Seketika aku hanya bisa berkata dalam hati.</p>
+
+          <blockquote>
+            "Sempurna."
+          </blockquote>
+
+          <p>Wanita ini begitu sederhana. Semakin aku mengenalnya, semakin banyak kebaikan yang kutemukan. Sampai hari itu, belum ada kekurangan yang mampu kulihat. Yang terus kutemukan justru kelebihan-kelebihan yang membuatku semakin kagum.</p>
+
+          <p>Jawaban itu membuatku terdiam. Di tengah kesibukan pekerjaannya, ia masih menyempatkan diri untuk menunaikan kewajibannya. Ia tetap ingat waktu sholat, tetap menjaga hal yang penting di tengah rutinitas yang padat.</p>
+
+          <p>Aku mengikuti dari belakang sampai ke depan mushola. Tidak mengatakan apa-apa. Hanya memperhatikan dan merenung.</p>
+
+          <p>Aku masih mengambil orderan dari Solaria. Namun sekarang bukan hanya karena pekerjaan. Kadang aku mampir untuk mengobrol sebentar.</p>
+
+          <p>Pernah terlintas keinginan untuk memberinya sesuatu, mungkin makanan kecil, atau menawarkan tumpangan jika ia pulang larut. Tetapi semua itu masih sebatas harapan.</p>
+
+          <p>Lalu aku menyadari banyak hal.</p>
+
+          <p>Aku pernah mengira perasaanku adalah sesuatu yang istimewa. Padahal mungkin aku hanya terbawa oleh kekaguman sendiri. Aku sadar bahwa ia baik kepada semua orang, bukan hanya kepadaku.</p>
+
+          <p>Dan itu tidak masalah.</p>
+
+          <p>Karena dari dirinya, aku belajar menghargai ketulusan. Aku belajar bahwa kebaikan tidak selalu berarti perhatian khusus. Kadang, kebaikan hanyalah sikap yang dilakukan dengan konsisten kepada siapa pun.</p>
+
+          <p>Aku juga belajar untuk menjadi orang yang lebih baik, bukan agar diperhatikan, melainkan karena memang ingin menjadi lebih baik.</p>
+
+          <p>Enam lembar struk itu masih tersimpan di laci motorku. Semuanya dari hari pertama.</p>
+
+          <p>Juwanti masih bekerja seperti biasa. Melayani pelanggan, tersenyum, dan bersikap baik kepada semua orang.</p>
+
+          <p>Dan aku masih di sini. Mengamati, belajar, dan berharap.</p>
+
+          <p>Mungkin suatu hari nanti. Mungkin juga tidak.</p>
+
+          <blockquote>
+            "Tapi aku masih berharap, dia adalah calon masa depanku."
+          </blockquote>
+
+          <div class="card-quote-final">
+            "Kecantikan sejati adalah ketulusan."
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 2: BERITA TERKINI (FORMALITAS) -->
+      <section id="berita" class="tab-content">
+        <div class="news-list">
+          <div class="news-card" onclick="showModal()">
+            <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=200&auto=format&fit=crop&q=60" class="news-thumb" alt="Teknologi">
+            <div class="news-info">
+              <span class="news-tag">Teknologi</span>
+              <h3 class="news-title">Inovasi Digital Terbaru Mengubah Tren Kerja Masa Kini</h3>
+              <span class="news-time">10 Menit yang lalu</span>
+            </div>
+          </div>
+
+          <div class="news-card" onclick="showModal()">
+            <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=200&auto=format&fit=crop&q=60" class="news-thumb" alt="Ekonomi">
+            <div class="news-info">
+              <span class="news-tag">Ekonomi</span>
+              <h3 class="news-title">Perkembangan Pasar Keuangan Pekan Ini Menunjukkan Tren Positif</h3>
+              <span class="news-time">1 Jam yang lalu</span>
+            </div>
+          </div>
+
+          <div class="news-card" onclick="showModal()">
+            <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?w=200&auto=format&fit=crop&q=60" class="news-thumb" alt="Gaya Hidup">
+            <div class="news-info">
+              <span class="news-tag">Gaya Hidup</span>
+              <h3 class="news-title">Tips Menjaga Keseimbangan Hidup dan Pekerjaan di Era Modern</h3>
+              <span class="news-time">3 Jam yang lalu</span>
+            </div>
+          </div>
+
+          <div class="news-card" onclick="showModal()">
+            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=200&auto=format&fit=crop&q=60" class="news-thumb" alt="Edukasi">
+            <div class="news-info">
+              <span class="news-tag">Edukasi</span>
+              <h3 class="news-title">Pentingnya Literasi Digital bagi Generasi Muda Masa Kini</h3>
+              <span class="news-time">5 Jam yang lalu</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: HIBURAN (FORMALITAS) -->
+      <section id="hiburan" class="tab-content">
+        <div class="news-list">
+          <div class="news-card" onclick="showModal()">
+            <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=200&auto=format&fit=crop&q=60" class="news-thumb" alt="Musik">
+            <div class="news-info">
+              <span class="news-tag">Musik</span>
+              <h3 class="news-title">Deretan Lagu Terpopuler Pekan Ini yang Wajib Masuk Playlist</h3>
+              <span class="news-time">2 Jam yang lalu</span>
+            </div>
+          </div>
+
+          <div class="news-card" onclick="showModal()">
+            <img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=200&auto=format&fit=crop&q=60" class="news-thumb" alt="Film">
+            <div class="news-info">
+              <span class="news-tag">Film</span>
+              <h3 class="news-title">Ulasan Film Terbaru: Kisah Hangat yang Menyentuh Hati</h3>
+              <span class="news-time">4 Jam yang lalu</span>
+            </div>
+          </div>
+
+          <div class="news-card" onclick="showModal()">
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=200&auto=format&fit=crop&q=60" class="news-thumb" alt="Seni">
+            <div class="news-info">
+              <span class="news-tag">Seni & Kultur</span>
+              <h3 class="news-title">Festival Seni dan Budaya Kembali Digelar Meriah Bulan Ini</h3>
+              <span class="news-time">6 Jam yang lalu</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      Terima kasih sudah membaca ❤️<br>
+      <span style="font-size:11px; margin-top:4px; display:block;">&copy; 2026 Ruang Kisah. Hak Cipta Dilindungi.</span>
+    </footer>
+
+    <!-- Tombol WhatsApp Mengambang -->
+    <div class="wa-float">
+      <a href="https://wa.me/6285133831172?text=Hubungi%20aku%20lagi." class="wa-btn">
+        <svg viewBox="0 0 24 24">
+          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+        </svg>
+        Hubungi Aku
+      </a>
+    </div>
+
+  </div>
+
+  <!-- Modal Formalitas -->
+  <div id="modalAlert" class="modal-overlay">
+    <div class="modal-box">
+      <h3>Informasi</h3>
+      <p>Artikel ini hanya merupakan draf atau pratinjau tampilan portal.</p>
+      <button class="modal-btn" onclick="closeModal()">Tutup</button>
+    </div>
+  </div>
+
+  <script>
+    // Logika Tab Interaktif
+    function openTab(evt, tabName) {
+      const contents = document.querySelectorAll('.tab-content');
+      const buttons = document.querySelectorAll('.tab-btn');
+
+      contents.forEach(content => content.classList.remove('active'));
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById(tabName).classList.add('active');
+      evt.currentTarget.classList.add('active');
+
+      // Reset scroll ke atas saat beralih tab
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Modal Formalitas
+    function showModal() {
+      document.getElementById('modalAlert').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('modalAlert').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
+
+```
+
